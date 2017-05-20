@@ -14,7 +14,6 @@ describe('Test my users', function(err){
     this.timeout(15000);
 
     it('should attempt to sample', function(done){
-      this.timeout(15000);
       setTimeout(done, 15000);
       address
         .get('/stream')
@@ -28,13 +27,26 @@ describe('Test my users', function(err){
   });
 
 
-  describe('CURD Movie Data', function(err){
+  describe('CRUD Movie Data', function(err){
     this.timeout(15000);
+ //    var token;
+ //
+ // before(function(done) {
+ //   address
+ //      .post('/login')
+ //      .send({'_id': '58e8ee7d0af6110ba0783ed1', 'username': 'admin',  'password': 'admin'})
+ //     .end(function(err, res) {
+ //       if (err) throw err;
+ //       token = { access_token: res.body.token }
+ //       done();
+ //     });
+ // });
 
     it('should attempt to save movie data', function(done){
       address
         .post('/stream/add')
-        .send({'Title': 'Star Wars: Episode IV - A New Hope', 'Year': '1977', 'imdbID': 'tt0076759', 'Poster':'https://images-na.ssl-images-amazon.com/images/M/MV5BYzQ2OTk4N2QtOGQwNy00MmI3LWEwNmEtOTk0OTY3NDk2MGJkL2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyNjc1NTYyMjg@._V1_SX300.jpg', 'comments':'Nice Movie'})
+        .send({'user':{'_id': '58e8ee7d0af6110ba0783ed1', 'username': 'admin',  'password': 'admin'},'Title': 'Star Wars: Episode IV - A New Hope', 'Year': '1977', 'imdbID': 'tt0076759', 'Poster':'https://images-na.ssl-images-amazon.com/images/M/MV5BYzQ2OTk4N2QtOGQwNy00MmI3LWEwNmEtOTk0OTY3NDk2MGJkL2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyNjc1NTYyMjg@._V1_SX300.jpg', 'comments':'Nice Movie'})
+        //.query(token)
         .expect(200)
         .expect('Content-Type', /json/)
         .end(function(err, res){

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Container, Input, Button} from 'semantic-ui-react';
-import { browserHistory } from 'react-router'
+import { browserHistory, hashHistory } from 'react-router';
 
 export default class DisplayMovie extends React.Component {
 	constructor () {
@@ -16,9 +16,9 @@ console.log(this.passwordInput.inputRef.value);
     data:{username:this.userInput.inputRef.value,password:this.passwordInput.inputRef.value},
     success:function(data) {
 		if(data.message==='Missing credentials'||data.message==='Incorrect username.'||data.message==='Incorrect password.')
-			browserHistory.push('/');
+			hashHistory.push('/');
 		else
-			browserHistory.push('/navbar');
+			hashHistory.push('/navbar');
     }.bind(this),
     error:function (error) {
     console.log(error);

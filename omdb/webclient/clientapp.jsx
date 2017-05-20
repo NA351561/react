@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Router, Route,IndexRoute, browserHistory} from 'react-router';
+import {Router, Route,IndexRoute, hashHistory} from 'react-router';
 
 import {Movie, DBMovies, NavBar, Login} from './components/movie';
 
 ReactDOM.render(
-		<Router history={browserHistory}>
+		<Router history={hashHistory}>
 			<Route path="/" component={Login}>
 				<IndexRoute component={Login} />
 			</Route>

@@ -26,8 +26,8 @@ export default class MovieCards extends React.Component {
 
 updateMovie(){
 console.log(this.textInput.ref.value);
-var btnId=this.props.movies.imdbID;
-if(this.state.comments)
+var btnId=this.props.movies._id;
+if(this.textInput.ref.value)
 	$.ajax({
 		url:'/stream/update',
 		type:'PUT',
@@ -61,8 +61,7 @@ deleteMovie(){
 			this.props.getDBMovieList();
 		}.bind(this),
 		error:function (data) {
-		$("#"+btnId).css('background-color','orange');
-		$("#"+btnId).text('Not deleted');
+		console.log(data);
 		}.bind(this)
 	})
 
@@ -90,8 +89,8 @@ deleteMovie(){
 			</div>:
 			<div>
 				<TextArea placeholder='comments' autoHeight ref={(input) => { this.textInput = input; }}/>
-				<Button id={this.props.movies.imdbID} color='purple' onClick={this.updateMovie.bind(this)} >update</Button>
-				<Button id={this.props.movies.imdbID} color='red' onClick={this.deleteMovie.bind(this)}>delete</Button>
+				<Button id={this.props.movies._id} color='purple' onClick={this.updateMovie.bind(this)} >update</Button>
+				<Button color='red' onClick={this.deleteMovie.bind(this)}>delete</Button>
 			</div>
 			}
       </Card.Content>

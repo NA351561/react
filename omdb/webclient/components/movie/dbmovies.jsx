@@ -6,7 +6,6 @@ export default class DBMovies extends React.Component {
 	constructor () {
 		super();
 		this.state={
-			success:'',
 			flag:false,
 			dbMovieList:[]
 		}
@@ -23,7 +22,8 @@ export default class DBMovies extends React.Component {
 						this.setState({dbMovieList:data});
 					}.bind(this),
 					error:function(error){
-						this.setState({success:error});
+						//this.setState({success:error});
+						console.log(error);
 					}.bind(this)
 
 		});

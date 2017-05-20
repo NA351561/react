@@ -42,12 +42,12 @@ passport.use(new LocalStrategy(
   }
 ));
 passport.serializeUser(function(user, done) {
-  console.log(user._id);
+  //console.log(user._id);
   done(null, user._id);
 });
 
 passport.deserializeUser(function(id, done) {
- console.log("deserializeUser")
+ //console.log("deserializeUser")
   User.findById(id, function(err, user) {
     done(err, user);
   });
@@ -65,6 +65,11 @@ passport.authenticate('local', function(err, user, info) {
   });
 })(req, res, next)
 });
+
+app.post('/logout',function(req,res,next){
+  req.session.destroy();
+  res.send('success');
+})
 
 // app.get('/login',function(req,res,next){
 //   res.send('failure login');

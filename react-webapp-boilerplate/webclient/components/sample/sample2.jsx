@@ -5,16 +5,24 @@ export default class Sample2 extends React.Component {
 	constructor () {
 		super();
 		this.state = {
-			name:''
+			name:'',
+      name2:''
 		}
 	}
 	handleNameState (event) {
 
-		this.props.changeTitle(event.target.value);
-		//this.setState({ name2:event.target.value});
+		//this.props.changeTitle(event.target.value);
+		this.setState({ name2:event.target.value});
+
+}
+
+    handleTitleState () {
+
+  		this.props.changeTitle(this.state.name2);
+  		//this.setState({ name2:event.target.value});
 
 
-	}
+  	}
 
 
 	render () {
@@ -23,8 +31,9 @@ export default class Sample2 extends React.Component {
 			<h1> Sample2 {this.props.name}</h1>
 				<TextField floatingLabelText="Name" onChange={this.handleNameState.bind(this)} />
 				<br/>
+        <RaisedButton label="Primary" primary={true}  onClick={this.handleTitleState.bind(this)}/>
 			</div>
 		);
 	}
 }//end of class
-  ``
+  

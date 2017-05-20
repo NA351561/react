@@ -6,8 +6,10 @@ var Auth=require('../schema/loginschema');
 /* GET users listing. */
 function isloggedIn(req, res, next) {
     if (req.user) {
+      console.log("user router",req.user);
         next();
     } else {
+      
         res.redirect('/login');
     }
 }
@@ -18,7 +20,7 @@ router.get('/', function(req, res, next) {
 });
 
 
-router.post('/add', function(req, res, next)
+router.post('/add',isloggedIn, function(req, res, next)
 {
   var movie=new Movie(req.body);
   movie.save(function(err,data){
@@ -29,7 +31,7 @@ router.post('/add', function(req, res, next)
   });
 });
 
-router.get('/display', function(req, res, next){
+router.get('/display', isloggedIn, function(req, res, next){
 Movie.find({},function(err,data){
 if(err)
   res.send(err);
@@ -39,7 +41,7 @@ else {
 });
 });
 
-router.put('/update', function (req, res, next) {
+router.put('/update', isloggedIn, function (req, res, next) {
   Movie.update({_id:req.body.id},{$set:{comments:req.body.comments}},function (err,data) {
     if(err)
       res.send({'success':'Not updated'});
@@ -49,7 +51,7 @@ router.put('/update', function (req, res, next) {
   })
 });
 
-router.delete('/delete', function (req, res, next) {
+router.delete('/delete', isloggedIn, function (req, res, next) {
   Movie.remove({_id:req.body.id},function (err,data) {
     if(err)
       res.send({'success':'Not deleted'});
